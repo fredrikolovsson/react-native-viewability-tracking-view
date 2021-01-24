@@ -4,16 +4,18 @@
   "description": "A React Native View that provides similar viewability tracking as the FlatList, but better™",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
-    "build" : "tsc",
+    "build": "tsc",
     "format": "prettier --write \"src/*.ts\" \"src/**/*.ts\"",
     "lint": "npx eslint .eslintrc .",
-    "postversion" : "git push && git push --tags",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
@@ -33,13 +35,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fredrikolovsson/react-native-viewable-tracking-view.git"
+    "url": "git+https://github.com/fredrikolovsson/react-native-viewability-tracking-view.git"
   },
-  "keywords": ["react-native", "view", "viewable", "viewability", "visibility", "tracking", "sensor"],
+  "keywords": [
+    "react-native",
+    "viewability",
+    "visibility",
+    "viewable",
+    "view",
+    "tracking",
+    "sensor"
+  ],
   "author": "Fredrik Olovsson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fredrikolovsson/react-native-viewable-tracking-view/issues"
+    "url": "https://github.com/fredrikolovsson/react-native-viewability-tracking-view/issues"
   },
-  "homepage": "https://github.com/fredrikolovsson/react-native-viewable-tracking-view#readme"
+  "homepage": "https://github.com/fredrikolovsson/react-native-viewability-tracking-view#readme"
 }
