@@ -5,6 +5,7 @@
     "declaration": true,
     "jsx": "react-native",
     "outDir": "./dist",
+    "skipLibCheck": true,
     "strict": true
   },
   "include": ["src"],
