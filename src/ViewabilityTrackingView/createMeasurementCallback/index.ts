@@ -1,11 +1,11 @@
 import { Dimensions, MeasureOnSuccessCallback } from 'react-native'
 
-import { Props } from '../types'
+import { ViewabilityTrackingViewProps } from '../types'
 
 interface CreateMeasurementCallbackParameters
   extends Required<
       Pick<
-        Props,
+        ViewabilityTrackingViewProps,
         | 'debug'
         | 'itemVisiblePercentThreshold'
         | 'minimumViewTime'
@@ -16,7 +16,7 @@ interface CreateMeasurementCallbackParameters
         | 'onViewabilityChange'
       >
     >,
-    Pick<Props, 'item' | 'testID'> {
+    Pick<ViewabilityTrackingViewProps, 'item' | 'testID'> {
   inViewSince: number | null
   outOfViewSince: number | null
   setInViewSince: (dateNowOrNull: number | null) => void

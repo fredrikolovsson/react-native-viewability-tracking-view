@@ -9,7 +9,7 @@ export interface OnViewabilityChangeParameters {
   timeOutOfView: number
 }
 
-export interface Props extends ViewProps {
+export interface ViewabilityTrackingViewProps extends ViewProps {
   children?: React.ReactNode
   debug?: boolean
   isViewabilityTrackingEnabled?: boolean

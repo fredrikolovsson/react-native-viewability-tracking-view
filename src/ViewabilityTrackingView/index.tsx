@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 import { createMeasurementCallback } from './createMeasurementCallback'
 import { useInterval } from '../useInterval'
-import { Props } from './types'
+import { ViewabilityTrackingViewProps } from './types'
 
 export function ViewabilityTrackingView({
   children = null,
@@ -20,7 +20,7 @@ export function ViewabilityTrackingView({
   testID,
   viewabilityMeasurementInterval = 250,
   ...viewProps
-}: Props): React.ReactElement {
+}: ViewabilityTrackingViewProps): React.ReactElement {
   const viewRef = React.useRef<View>(null)
 
   const [inViewSince, setInViewSince] = React.useState<number | null>(null)
