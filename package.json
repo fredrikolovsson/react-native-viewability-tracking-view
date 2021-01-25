@@ -1,6 +1,6 @@
 {
   "name": "react-native-viewability-tracking-view",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A React Native View that provides similar viewability tracking as the FlatList, but better™",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
