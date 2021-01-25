@@ -5,8 +5,7 @@ export interface OnViewabilityChangeParameters {
   item?: Record<string, unknown>
   itemVisiblePercent: number
   testID?: string
-  timeInView: number
-  timeOutOfView: number
+  timeInView?: number
 }
 
 export interface ViewabilityTrackingViewProps extends ViewProps {

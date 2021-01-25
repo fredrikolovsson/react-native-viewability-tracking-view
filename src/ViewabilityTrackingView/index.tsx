@@ -23,16 +23,18 @@ export function ViewabilityTrackingView({
 }: ViewabilityTrackingViewProps): React.ReactElement {
   const viewRef = React.useRef<View>(null)
 
+  const [
+    hasReportedViewabilityChange,
+    setHasReportedViewabilityChange,
+  ] = React.useState<boolean>(false)
   const [inViewSince, setInViewSince] = React.useState<number | null>(null)
-  const [outOfViewSince, setOutOfViewSince] = React.useState<number | null>(
-    null
-  )
 
   const checkViewability = React.useCallback(() => {
     if (isViewabilityTrackingEnabled && viewRef.current) {
       viewRef.current.measure(
         createMeasurementCallback({
           debug,
+          hasReportedViewabilityChange,
           inViewSince,
           item,
           itemVisiblePercentThreshold,
@@ -42,15 +44,15 @@ export function ViewabilityTrackingView({
           offsetRight,
           offsetTop,
           onViewabilityChange,
-          outOfViewSince,
+          setHasReportedViewabilityChange,
           setInViewSince,
-          setOutOfViewSince,
           testID,
         })
       )
     }
   }, [
     debug,
+    hasReportedViewabilityChange,
     inViewSince,
     isViewabilityTrackingEnabled,
     item,
@@ -61,9 +63,8 @@ export function ViewabilityTrackingView({
     offsetRight,
     offsetTop,
     onViewabilityChange,
-    outOfViewSince,
+    setHasReportedViewabilityChange,
     setInViewSince,
-    setOutOfViewSince,
     testID,
   ])
 
