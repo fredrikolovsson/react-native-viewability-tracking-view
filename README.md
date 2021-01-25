@@ -1,5 +1,7 @@
 # react-native-viewability-tracking-view
 
+> WARNING! This is still under development and not working as intended yet.
+
 ## TL;DR
 
 By default, `onViewabilityChange` will be called when at least 50% of the `ViewabilityTrackingView` has been rendered within the device's screen dimensions for at least 1000 ms.
