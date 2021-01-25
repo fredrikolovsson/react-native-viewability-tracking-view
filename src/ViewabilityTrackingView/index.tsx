@@ -28,6 +28,9 @@ export function ViewabilityTrackingView({
     setHasReportedViewabilityChange,
   ] = React.useState<boolean>(false)
   const [inViewSince, setInViewSince] = React.useState<number | null>(null)
+  const [outOfViewSince, setOutOfViewSince] = React.useState<number | null>(
+    null
+  )
 
   const checkViewability = React.useCallback(() => {
     if (isViewabilityTrackingEnabled && viewRef.current) {
@@ -44,8 +47,10 @@ export function ViewabilityTrackingView({
           offsetRight,
           offsetTop,
           onViewabilityChange,
+          outOfViewSince,
           setHasReportedViewabilityChange,
           setInViewSince,
+          setOutOfViewSince,
           testID,
         })
       )
@@ -63,8 +68,10 @@ export function ViewabilityTrackingView({
     offsetRight,
     offsetTop,
     onViewabilityChange,
+    outOfViewSince,
     setHasReportedViewabilityChange,
     setInViewSince,
+    setOutOfViewSince,
     testID,
   ])
 

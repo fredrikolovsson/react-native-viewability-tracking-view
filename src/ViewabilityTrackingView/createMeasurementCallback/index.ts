@@ -19,8 +19,10 @@ interface CreateMeasurementCallbackParameters
     Pick<ViewabilityTrackingViewProps, 'item' | 'testID'> {
   hasReportedViewabilityChange: boolean
   inViewSince: number | null
+  outOfViewSince: number | null
   setHasReportedViewabilityChange: (bool: boolean) => void
   setInViewSince: (dateNowOrNull: number | null) => void
+  setOutOfViewSince: (dateNowOrNull: number | null) => void
 }
 
 export const createMeasurementCallback = ({
@@ -35,8 +37,10 @@ export const createMeasurementCallback = ({
   offsetRight,
   offsetTop,
   onViewabilityChange,
+  outOfViewSince,
   setHasReportedViewabilityChange,
   setInViewSince,
+  setOutOfViewSince,
   testID,
 }: CreateMeasurementCallbackParameters): MeasureOnSuccessCallback => (
   _x,
@@ -76,14 +80,27 @@ export const createMeasurementCallback = ({
     itemVisiblePercent >= itemVisiblePercentThreshold
 
   if (isInView) {
-    if (
-      inViewSince &&
-      now - inViewSince > minimumViewTime &&
+    if (!inViewSince) {
+      if (debug) {
+        console.log(
+          `testID: ${testID} came into view: pageX, pageY, width, height`,
+          pageX,
+          pageY,
+          width,
+          height
+        )
+      }
+
+      setHasReportedViewabilityChange(false)
+      setInViewSince(Date.now())
+      setOutOfViewSince(null)
+    } else if (
+      now - inViewSince >= minimumViewTime &&
       !hasReportedViewabilityChange
     ) {
       if (debug) {
         console.log(
-          `testID: ${testID} is still in view: pageX, pageY, width, height`,
+          `testID: ${testID} has been in view more than the minimumViewTime: pageX, pageY, width, height`,
           pageX,
           pageY,
           width,
@@ -99,21 +116,8 @@ export const createMeasurementCallback = ({
         timeInView: now - inViewSince,
       })
       setHasReportedViewabilityChange(true)
-    } else {
-      if (debug) {
-        console.log(
-          `testID: ${testID} came into view: pageX, pageY, width, height`,
-          pageX,
-          pageY,
-          width,
-          height
-        )
-      }
-
-      setInViewSince(Date.now())
-      setHasReportedViewabilityChange(false)
     }
-  } else {
+  } else if (!outOfViewSince) {
     if (debug) {
       console.log(
         `testID: ${testID} went out of view: pageX, pageY, width, height`,
@@ -132,5 +136,6 @@ export const createMeasurementCallback = ({
     })
     setHasReportedViewabilityChange(true)
     setInViewSince(null)
+    setOutOfViewSince(Date.now())
   }
 }
