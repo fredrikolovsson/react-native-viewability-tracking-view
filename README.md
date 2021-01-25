@@ -1,6 +1,6 @@
 # react-native-viewability-tracking-view
 
-> WARNING! This is still under development and not working as intended yet.
+> WARNING! This component is still under development, it is lacking automated tests and there might be bugs and the API can change between minor versions until it is published as 1.0.0.
 
 ## TL;DR
 
