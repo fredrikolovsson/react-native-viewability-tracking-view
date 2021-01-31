@@ -1,5 +1,6 @@
 import { Dimensions, MeasureOnSuccessCallback } from 'react-native'
 
+import { onOutOfView } from './onOutOfView'
 import { CreateMeasurementCallbackParameters } from './types'
 
 export const createMeasurementCallback = ({
@@ -95,24 +96,19 @@ export const createMeasurementCallback = ({
       setHasReportedViewabilityChange(true)
     }
   } else if (!outOfViewSince) {
-    if (debug) {
-      console.log(
-        `testID: ${testID} went out of view: pageX, pageY, width, height`,
-        pageX,
-        pageY,
-        width,
-        height
-      )
-    }
-
-    onViewabilityChange({
-      isInView: false,
+    onOutOfView({
+      debug,
+      height,
       item,
       itemVisiblePercent,
+      onViewabilityChange,
+      pageX,
+      pageY,
+      setHasReportedViewabilityChange,
+      setInViewSince,
+      setOutOfViewSince,
       testID,
+      width,
     })
-    setHasReportedViewabilityChange(true)
-    setInViewSince(null)
-    setOutOfViewSince(Date.now())
   }
 }
