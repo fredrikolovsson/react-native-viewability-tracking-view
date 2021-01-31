@@ -75,5 +75,15 @@ export function onInView({
       timeInView: now - inViewSince,
     })
     setHasReportedViewabilityChange(true)
+  } else {
+    if (debug) {
+      console.log(
+        `testID: ${testID} is in view: pageX, pageY, width, height`,
+        pageX,
+        pageY,
+        width,
+        height
+      )
+    }
   }
 }
