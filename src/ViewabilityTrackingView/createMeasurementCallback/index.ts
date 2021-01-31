@@ -77,13 +77,14 @@ export const createMeasurementCallback = ({
       testID,
       width,
     })
-  } else if (!outOfViewSince) {
+  } else {
     onOutOfView({
       debug,
       height,
       item,
       itemVisiblePercent,
       onViewabilityChange,
+      outOfViewSince,
       pageX,
       pageY,
       setHasReportedViewabilityChange,

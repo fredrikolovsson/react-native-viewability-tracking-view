@@ -5,6 +5,7 @@ type OnOutOfViewParameters = Pick<
   | 'debug'
   | 'item'
   | 'onViewabilityChange'
+  | 'outOfViewSince'
   | 'setHasReportedViewabilityChange'
   | 'setInViewSince'
   | 'setOutOfViewSince'
@@ -23,6 +24,7 @@ export function onOutOfView({
   item,
   itemVisiblePercent,
   onViewabilityChange,
+  outOfViewSince,
   pageX,
   pageY,
   setHasReportedViewabilityChange,
@@ -31,23 +33,25 @@ export function onOutOfView({
   testID,
   width,
 }: OnOutOfViewParameters): void {
-  if (debug) {
-    console.log(
-      `testID: ${testID} went out of view: pageX, pageY, width, height`,
-      pageX,
-      pageY,
-      width,
-      height
-    )
-  }
+  if (!outOfViewSince) {
+    if (debug) {
+      console.log(
+        `testID: ${testID} went out of view: pageX, pageY, width, height`,
+        pageX,
+        pageY,
+        width,
+        height
+      )
+    }
 
-  onViewabilityChange({
-    isInView: false,
-    item,
-    itemVisiblePercent,
-    testID,
-  })
-  setHasReportedViewabilityChange(true)
-  setInViewSince(null)
-  setOutOfViewSince(Date.now())
+    onViewabilityChange({
+      isInView: false,
+      item,
+      itemVisiblePercent,
+      testID,
+    })
+    setHasReportedViewabilityChange(true)
+    setInViewSince(null)
+    setOutOfViewSince(Date.now())
+  }
 }
