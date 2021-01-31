@@ -11,6 +11,7 @@ type OnOutOfViewParameters = Pick<
   | 'testID'
 > & {
   itemVisiblePercent: number
+  now: number
 }
 
 export function onOutOfView({

@@ -92,6 +92,7 @@ export const createMeasurementCallback = ({
     onOutOfView({
       item,
       itemVisiblePercent,
+      now,
       onViewabilityChange,
       outOfViewSince,
       setHasReportedViewabilityChange,
