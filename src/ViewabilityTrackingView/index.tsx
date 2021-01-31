@@ -32,7 +32,7 @@ export function ViewabilityTrackingView({
     null
   )
 
-  const checkViewability = React.useCallback(() => {
+  const checkViewability = () => {
     if (isViewabilityTrackingEnabled && viewRef.current) {
       viewRef.current.measure(
         createMeasurementCallback({
@@ -55,25 +55,7 @@ export function ViewabilityTrackingView({
         })
       )
     }
-  }, [
-    debug,
-    hasReportedViewabilityChange,
-    inViewSince,
-    isViewabilityTrackingEnabled,
-    item,
-    itemVisiblePercentThreshold,
-    minimumViewTime,
-    offsetBottom,
-    offsetLeft,
-    offsetRight,
-    offsetTop,
-    onViewabilityChange,
-    outOfViewSince,
-    setHasReportedViewabilityChange,
-    setInViewSince,
-    setOutOfViewSince,
-    testID,
-  ])
+  }
 
   React.useEffect(() => {
     // reset to initialState if tracking is disabled
