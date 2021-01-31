@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { View } from 'react-native'
 
-import { createMeasurementCallback } from './createMeasurementCallback'
-import { useInterval } from '../useInterval'
+import { createOnMeasure } from './createOnMeasure'
 import { ViewabilityTrackingViewProps } from './types'
+import { useInterval } from './useInterval'
 
 export function ViewabilityTrackingView({
   children = null,
@@ -32,10 +32,10 @@ export function ViewabilityTrackingView({
     null
   )
 
-  const checkViewability = React.useCallback(() => {
+  const checkViewability = () => {
     if (isViewabilityTrackingEnabled && viewRef.current) {
       viewRef.current.measure(
-        createMeasurementCallback({
+        createOnMeasure({
           debug,
           hasReportedViewabilityChange,
           inViewSince,
@@ -55,28 +55,10 @@ export function ViewabilityTrackingView({
         })
       )
     }
-  }, [
-    debug,
-    hasReportedViewabilityChange,
-    inViewSince,
-    isViewabilityTrackingEnabled,
-    item,
-    itemVisiblePercentThreshold,
-    minimumViewTime,
-    offsetBottom,
-    offsetLeft,
-    offsetRight,
-    offsetTop,
-    onViewabilityChange,
-    outOfViewSince,
-    setHasReportedViewabilityChange,
-    setInViewSince,
-    setOutOfViewSince,
-    testID,
-  ])
+  }
 
   React.useEffect(() => {
-    // reset to initialState if tracking is disabled
+    // reset to initialState if tracking becomes disabled
     if (!isViewabilityTrackingEnabled) {
       setHasReportedViewabilityChange(false)
       setInViewSince(null)
