@@ -2,7 +2,6 @@ import { CreateMeasurementCallbackParameters } from '../types'
 
 type OnOutOfViewParameters = Pick<
   CreateMeasurementCallbackParameters,
-  | 'debug'
   | 'item'
   | 'onViewabilityChange'
   | 'outOfViewSince'
@@ -11,39 +10,20 @@ type OnOutOfViewParameters = Pick<
   | 'setOutOfViewSince'
   | 'testID'
 > & {
-  height: number
   itemVisiblePercent: number
-  pageX: number
-  pageY: number
-  width: number
 }
 
 export function onOutOfView({
-  debug,
-  height,
   item,
   itemVisiblePercent,
   onViewabilityChange,
   outOfViewSince,
-  pageX,
-  pageY,
   setHasReportedViewabilityChange,
   setInViewSince,
   setOutOfViewSince,
   testID,
-  width,
 }: OnOutOfViewParameters): void {
   if (!outOfViewSince) {
-    if (debug) {
-      console.log(
-        `testID: ${testID} went out of view: pageX, pageY, width, height`,
-        pageX,
-        pageY,
-        width,
-        height
-      )
-    }
-
     onViewabilityChange({
       isInView: false,
       item,
@@ -53,15 +33,5 @@ export function onOutOfView({
     setHasReportedViewabilityChange(true)
     setInViewSince(null)
     setOutOfViewSince(Date.now())
-  } else {
-    if (debug) {
-      console.log(
-        `testID: ${testID} is out of view: pageX, pageY, width, height`,
-        pageX,
-        pageY,
-        width,
-        height
-      )
-    }
   }
 }

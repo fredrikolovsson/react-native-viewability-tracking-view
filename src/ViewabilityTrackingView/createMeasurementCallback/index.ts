@@ -58,40 +58,46 @@ export const createMeasurementCallback = ({
     (isCoveringFullHeight && isCoveringFullWidth) ||
     itemVisiblePercent >= itemVisiblePercentThreshold
 
+  if (debug) {
+    console.log(`testID: ${testID}`, {
+      isCoveringFullHeight,
+      isCoveringFullWidth,
+      fractionHeightInView,
+      fractionWidthInView,
+      isInView,
+      itemVisiblePercent,
+      now,
+      pageX,
+      pageY,
+      width,
+      height,
+    })
+  }
+
   if (isInView) {
     onInView({
-      debug,
       hasReportedViewabilityChange,
-      height,
       inViewSince,
       item,
       itemVisiblePercent,
       minimumViewTime,
       now,
       onViewabilityChange,
-      pageX,
-      pageY,
       setHasReportedViewabilityChange,
       setInViewSince,
       setOutOfViewSince,
       testID,
-      width,
     })
   } else {
     onOutOfView({
-      debug,
-      height,
       item,
       itemVisiblePercent,
       onViewabilityChange,
       outOfViewSince,
-      pageX,
-      pageY,
       setHasReportedViewabilityChange,
       setInViewSince,
       setOutOfViewSince,
       testID,
-      width,
     })
   }
 }
