@@ -1,7 +1,7 @@
-import { CreateMeasurementCallbackParameters } from '../types'
+import { OnMeasureParameters } from '../types'
 
 type OnOutOfViewParameters = Pick<
-  CreateMeasurementCallbackParameters,
+  OnMeasureParameters,
   | 'item'
   | 'onViewabilityChange'
   | 'outOfViewSince'

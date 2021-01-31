@@ -2,9 +2,9 @@ import { Dimensions, MeasureOnSuccessCallback } from 'react-native'
 
 import { onInView } from './onInView'
 import { onOutOfView } from './onOutOfView'
-import { CreateMeasurementCallbackParameters } from './types'
+import { OnMeasureParameters } from './types'
 
-export const createMeasurementCallback = ({
+export const createOnMeasure = ({
   debug,
   hasReportedViewabilityChange,
   inViewSince,
@@ -21,7 +21,7 @@ export const createMeasurementCallback = ({
   setInViewSince,
   setOutOfViewSince,
   testID,
-}: CreateMeasurementCallbackParameters): MeasureOnSuccessCallback => (
+}: OnMeasureParameters): MeasureOnSuccessCallback => (
   _x,
   _y,
   width,
@@ -29,7 +29,9 @@ export const createMeasurementCallback = ({
   pageX,
   pageY
 ) => {
-  const { height: deviceHeight, width: deviceWidth } = Dimensions.get('window')
+  const now = Date.now()
+  const { height: deviceHeight, width: deviceWidth } =
+    Dimensions.get('window')
 
   const isCoveringFullHeight =
     pageY <= offsetTop && pageY + height >= deviceHeight - offsetBottom
@@ -53,24 +55,24 @@ export const createMeasurementCallback = ({
     width === 0 || isCoveringFullWidth ? 1 : 1 - widthOutOfView / width
   const itemVisiblePercent = fractionHeightInView * fractionWidthInView * 100
 
-  const now = Date.now()
   const isInView =
     (isCoveringFullHeight && isCoveringFullWidth) ||
     itemVisiblePercent >= itemVisiblePercentThreshold
 
   if (debug) {
     console.log(`testID: ${testID}`, {
-      isCoveringFullHeight,
-      isCoveringFullWidth,
       fractionHeightInView,
       fractionWidthInView,
+      height,
+      heightOutOfView,
+      isCoveringFullHeight,
+      isCoveringFullWidth,
       isInView,
       itemVisiblePercent,
-      now,
       pageX,
       pageY,
       width,
-      height,
+      widthOutOfView,
     })
   }
 

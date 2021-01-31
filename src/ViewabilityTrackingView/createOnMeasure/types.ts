@@ -1,6 +1,6 @@
 import { ViewabilityTrackingViewProps } from '../types'
 
-export interface CreateMeasurementCallbackParameters
+export interface OnMeasureParameters
   extends Required<
       Pick<
         ViewabilityTrackingViewProps,

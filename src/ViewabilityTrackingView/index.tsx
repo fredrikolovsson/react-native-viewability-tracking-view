@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { View } from 'react-native'
 
-import { createMeasurementCallback } from './createMeasurementCallback'
+import { createOnMeasure } from './createOnMeasure'
 import { ViewabilityTrackingViewProps } from './types'
 import { useInterval } from './useInterval'
 
@@ -35,7 +35,7 @@ export function ViewabilityTrackingView({
   const checkViewability = () => {
     if (isViewabilityTrackingEnabled && viewRef.current) {
       viewRef.current.measure(
-        createMeasurementCallback({
+        createOnMeasure({
           debug,
           hasReportedViewabilityChange,
           inViewSince,
