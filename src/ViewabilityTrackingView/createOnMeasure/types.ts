@@ -15,6 +15,7 @@ export interface OnMeasureParameters
       >
     >,
     Pick<ViewabilityTrackingViewProps, 'item' | 'testID'> {
+  __mock__DimensionsGetWindow?: jest.Mock<{ height: number; width: number }>
   hasReportedViewabilityChange: boolean
   inViewSince: number | null
   outOfViewSince: number | null

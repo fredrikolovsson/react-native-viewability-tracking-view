@@ -5,6 +5,7 @@ import { onOutOfView } from './onOutOfView'
 import { OnMeasureParameters } from './types'
 
 export const createOnMeasure = ({
+  __mock__DimensionsGetWindow,
   debug,
   hasReportedViewabilityChange,
   inViewSince,
@@ -31,6 +32,7 @@ export const createOnMeasure = ({
 ) => {
   const now = Date.now()
   const { height: deviceHeight, width: deviceWidth } =
+    (__mock__DimensionsGetWindow && __mock__DimensionsGetWindow()) ||
     Dimensions.get('window')
 
   const isCoveringFullHeight =
