@@ -53,5 +53,15 @@ export function onOutOfView({
     setHasReportedViewabilityChange(true)
     setInViewSince(null)
     setOutOfViewSince(Date.now())
+  } else {
+    if (debug) {
+      console.log(
+        `testID: ${testID} is out of view: pageX, pageY, width, height`,
+        pageX,
+        pageY,
+        width,
+        height
+      )
+    }
   }
 }
