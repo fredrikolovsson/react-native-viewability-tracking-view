@@ -1,5 +1,6 @@
 import { Dimensions, MeasureOnSuccessCallback } from 'react-native'
 
+import { onInView } from './onInView'
 import { onOutOfView } from './onOutOfView'
 import { CreateMeasurementCallbackParameters } from './types'
 
@@ -58,43 +59,24 @@ export const createMeasurementCallback = ({
     itemVisiblePercent >= itemVisiblePercentThreshold
 
   if (isInView) {
-    if (!inViewSince) {
-      if (debug) {
-        console.log(
-          `testID: ${testID} came into view: pageX, pageY, width, height`,
-          pageX,
-          pageY,
-          width,
-          height
-        )
-      }
-
-      setHasReportedViewabilityChange(false)
-      setInViewSince(Date.now())
-      setOutOfViewSince(null)
-    } else if (
-      now - inViewSince >= minimumViewTime &&
-      !hasReportedViewabilityChange
-    ) {
-      if (debug) {
-        console.log(
-          `testID: ${testID} has been in view more than the minimumViewTime: pageX, pageY, width, height`,
-          pageX,
-          pageY,
-          width,
-          height
-        )
-      }
-
-      onViewabilityChange({
-        isInView: true,
-        item,
-        itemVisiblePercent,
-        testID,
-        timeInView: now - inViewSince,
-      })
-      setHasReportedViewabilityChange(true)
-    }
+    onInView({
+      debug,
+      hasReportedViewabilityChange,
+      height,
+      inViewSince,
+      item,
+      itemVisiblePercent,
+      minimumViewTime,
+      now,
+      onViewabilityChange,
+      pageX,
+      pageY,
+      setHasReportedViewabilityChange,
+      setInViewSince,
+      setOutOfViewSince,
+      testID,
+      width,
+    })
   } else if (!outOfViewSince) {
     onOutOfView({
       debug,
