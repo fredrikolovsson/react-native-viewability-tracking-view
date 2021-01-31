@@ -2,8 +2,8 @@ import * as React from 'react'
 import { View } from 'react-native'
 import { render } from '@testing-library/react-native'
 
-import { useInterval } from '../useInterval'
 import { ViewabilityTrackingView } from './index'
+import { useInterval } from './useInterval'
 
 jest.mock('../useInterval')
 
