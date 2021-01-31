@@ -5,7 +5,7 @@ import { render } from '@testing-library/react-native'
 import { ViewabilityTrackingView } from './index'
 import { useInterval } from './useInterval'
 
-jest.mock('../useInterval')
+jest.mock('./useInterval')
 
 beforeEach(() => {
   jest.resetAllMocks()

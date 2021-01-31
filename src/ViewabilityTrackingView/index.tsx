@@ -2,8 +2,8 @@ import * as React from 'react'
 import { View } from 'react-native'
 
 import { createMeasurementCallback } from './createMeasurementCallback'
-import { useInterval } from '../useInterval'
 import { ViewabilityTrackingViewProps } from './types'
+import { useInterval } from './useInterval'
 
 export function ViewabilityTrackingView({
   children = null,
