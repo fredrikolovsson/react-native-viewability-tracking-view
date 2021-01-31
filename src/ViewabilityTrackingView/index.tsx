@@ -58,7 +58,7 @@ export function ViewabilityTrackingView({
   }
 
   React.useEffect(() => {
-    // reset to initialState if tracking is disabled
+    // reset to initialState if tracking becomes disabled
     if (!isViewabilityTrackingEnabled) {
       setHasReportedViewabilityChange(false)
       setInViewSince(null)
