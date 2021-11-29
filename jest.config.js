@@ -9,6 +9,7 @@ module.exports = {
     }
   },
   preset: "react-native",
+  testPathIgnorePatterns: ['dist', 'node_modules'],
   transform: {
     ...tsjPreset.transform,
     "\\.ts$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
