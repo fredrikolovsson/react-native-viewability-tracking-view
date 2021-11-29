@@ -9,7 +9,7 @@ import {
 export { OnViewabilityCallback, OnViewabilityCallbackParameters }
 
 export interface ViewabilityTrackingViewProps<
-  Item extends Record<string, unknown>
+  Item extends Record<string, unknown> = Record<string, never>
 > extends ViewProps {
   /**
    * DEV ONLY: Set to true to get console.logs of the viewability, each time it's measured.
