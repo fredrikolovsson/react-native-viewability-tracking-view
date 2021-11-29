@@ -44,7 +44,7 @@ export const MyComponent = ({
 
 ```ts
 export interface OnViewabilityCallbackParameters<
-  Item extends Record<string, unknown> = {}
+  Item extends Record<string, unknown> = Record<string, never>
 > {
   isInView: boolean
   item?: Item
@@ -55,7 +55,7 @@ export interface OnViewabilityCallbackParameters<
 }
 
 export interface ViewabilityTrackingViewProps<
-  Item extends Record<string, unknown>
+  Item extends Record<string, unknown> = Record<string, never>
 > extends ViewProps {
   /**
    * DEV ONLY: Set to true to get console.logs of the viewability, each time it's measured.
