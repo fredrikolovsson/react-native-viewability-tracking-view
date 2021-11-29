@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "format": "prettier --write \"src/*.ts\" \"src/**/*.ts\"",
-    "lint": "npx eslint .eslintrc \"src/*.ts\" \"src/**/*.ts\"",
+    "lint": "npx eslint \"src/*.ts\" \"src/**/*.ts\"",
     "postversion": "git push && git push --tags",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
