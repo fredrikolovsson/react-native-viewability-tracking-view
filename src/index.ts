@@ -1,7 +1,8 @@
 import { ViewabilityTrackingView } from './ViewabilityTrackingView'
 
-export {
-  OnViewabilityChangeParameters,
+export type {
+  OnViewabilityCallback,
+  OnViewabilityCallbackParameters,
   ViewabilityTrackingViewProps,
 } from './ViewabilityTrackingView/types'
 
