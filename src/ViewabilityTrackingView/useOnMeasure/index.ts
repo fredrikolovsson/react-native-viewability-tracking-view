@@ -16,9 +16,9 @@ export interface OnViewabilityCallbackParameters<
   timeOutOfView?: number
 }
 
-export type OnViewabilityCallback<Item extends Record<string, unknown> = Record<string, never>> = (
-  params: OnViewabilityCallbackParameters<Item>
-) => void
+export type OnViewabilityCallback<
+  Item extends Record<string, unknown> = Record<string, never>
+> = (params: OnViewabilityCallbackParameters<Item>) => void
 
 export interface ViewabilityState {
   hasCalledOnViewabilityChange: boolean
@@ -41,7 +41,9 @@ export interface OnMeasureParameters<
   viewabilityState: ViewabilityState
 }
 
-export const useOnMeasure = <Item extends Record<string, unknown> = Record<string, never>>({
+export const useOnMeasure = <
+  Item extends Record<string, unknown> = Record<string, never>
+>({
   __mock__DimensionsGetWindow,
   debug,
   item,
