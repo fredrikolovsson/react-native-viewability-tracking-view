@@ -1,14 +1,20 @@
 import * as React from 'react'
 import { View } from 'react-native'
 
-import { createOnMeasure } from './createOnMeasure'
-import { ViewabilityTrackingViewProps } from './types'
+import { useOnMeasure, ViewabilityState } from './useOnMeasure'
 import { useInterval } from './useInterval'
+import { ViewabilityTrackingViewProps } from './types'
 
-export function ViewabilityTrackingView({
+const initialState = {
+  hasCalledOnViewabilityChange: false,
+  inViewSince: null,
+  outOfViewSince: null,
+}
+
+export const ViewabilityTrackingView = <Item extends Record<string, unknown>>({
+  __DEV__debug = false,
   children = null,
-  debug = false,
-  isViewabilityTrackingEnabled = true,
+  enabled,
   item,
   itemVisiblePercentThreshold = 50,
   minimumViewTime = 1000,
@@ -17,59 +23,52 @@ export function ViewabilityTrackingView({
   offsetRight = 0,
   offsetTop = 0,
   onViewabilityChange,
+  onViewabilityCheck,
   testID,
-  viewabilityMeasurementInterval = 250,
+  viewabilityMeasurementInterval = 200,
   ...viewProps
-}: ViewabilityTrackingViewProps): React.ReactElement {
+}: ViewabilityTrackingViewProps<Item>): React.ReactElement => {
   const viewRef = React.useRef<View>(null)
-
-  const [
-    hasReportedViewabilityChange,
-    setHasReportedViewabilityChange,
-  ] = React.useState<boolean>(false)
-  const [inViewSince, setInViewSince] = React.useState<number | null>(null)
-  const [outOfViewSince, setOutOfViewSince] = React.useState<number | null>(
-    null
-  )
-
-  const checkViewability = () => {
-    if (isViewabilityTrackingEnabled && viewRef.current) {
-      viewRef.current.measure(
-        createOnMeasure({
-          debug,
-          hasReportedViewabilityChange,
-          inViewSince,
-          item,
-          itemVisiblePercentThreshold,
-          minimumViewTime,
-          offsetBottom,
-          offsetLeft,
-          offsetRight,
-          offsetTop,
-          onViewabilityChange,
-          outOfViewSince,
-          setHasReportedViewabilityChange,
-          setInViewSince,
-          setOutOfViewSince,
-          testID,
-        })
-      )
-    }
-  }
+  const [viewabilityState, setViewabilityState] = React.useState<ViewabilityState>(initialState)
 
   React.useEffect(() => {
     // reset to initialState if tracking becomes disabled
-    if (!isViewabilityTrackingEnabled) {
-      setHasReportedViewabilityChange(false)
-      setInViewSince(null)
-      setOutOfViewSince(null)
+    if (!enabled) {
+      setViewabilityState(initialState)
     }
-  }, [isViewabilityTrackingEnabled])
+  }, [enabled])
 
-  useInterval(checkViewability, viewabilityMeasurementInterval)
+  const viewabilityMeasurementConfig = {
+    itemVisiblePercentThreshold,
+    offsetBottom,
+    offsetLeft,
+    offsetRight,
+    offsetTop,
+  }
+
+  const onMeasure = useOnMeasure({
+    debug: __DEV__debug,
+    item,
+    minimumViewTime,
+    onViewabilityChange,
+    onViewabilityCheck,
+    setViewabilityState,
+    testID,
+    viewabilityMeasurementConfig,
+    viewabilityState,
+  })
+
+  const checkViewability = () => {
+    if (enabled && viewRef.current) {
+      viewRef.current.measure(onMeasure)
+    }
+  }
+
+  // only check viewability if tracking is enabled
+  useInterval(checkViewability, enabled ? viewabilityMeasurementInterval : null)
 
   return (
-    <View {...viewProps} ref={viewRef} testID={testID}>
+    <View {...viewProps} collapsable={false} ref={viewRef} testID={testID}>
       {children}
     </View>
   )
